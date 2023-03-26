@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">solCoin</string>
+    <string name="inicio">Inicio</string>
+    <string name="pagos">Pagos</string>
+    <string name="cartera">Cartera</string>
+    <string name="saldo">100</string>
 </resources>
