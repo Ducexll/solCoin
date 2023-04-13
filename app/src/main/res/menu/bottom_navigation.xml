@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/firstFrangment"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Primero" />
+    <item
+        android:id="@+id/secondFrangment"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Segundo" />
+    <item
+        android:id="@+id/thirdFrangment"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Tercero" />
+
+</menu>

@@ -7,4 +7,12 @@
         <item name="colorAccent">@color/teal_200</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="BottomNavigation">
+        <item name="android:background">@color/purple_500</item>
+        <item name="itemIconTint">@color/purple_700</item>
+        <item name="itemTextColor">@color/purple_200</item>
+
+
+    </style>
 </resources>

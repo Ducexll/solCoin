@@ -13,6 +13,13 @@
         android:theme="@style/Theme.SolCoin"
         tools:targetApi="31">
         <activity
+            android:name=".Pagos"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MenuCreacionUsuario"
             android:exported="false">
             <meta-data
