@@ -3,15 +3,15 @@
 
     <item
         android:id="@+id/firstFrangment"
-        android:icon="@android:drawable/ic_input_add"
-        android:title="Primero" />
+        android:icon="@drawable/ic_home"
+        android:title="Inicio" />
     <item
         android:id="@+id/secondFrangment"
-        android:icon="@android:drawable/ic_input_add"
-        android:title="Segundo" />
+        android:icon="@drawable/ic_euro"
+        android:title="Pagos" />
     <item
         android:id="@+id/thirdFrangment"
-        android:icon="@android:drawable/ic_input_add"
-        android:title="Tercero" />
+        android:icon="@drawable/ic_wallet"
+        android:title="Cartera" />
 
 </menu>
