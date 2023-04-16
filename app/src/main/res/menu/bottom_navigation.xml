@@ -7,8 +7,8 @@
         android:title="Inicio" />
     <item
         android:id="@+id/secondFrangment"
-        android:icon="@drawable/ic_euro"
-        android:title="Pagos" />
+        android:icon="@drawable/ic_regalo"
+        android:title="Premios" />
     <item
         android:id="@+id/thirdFrangment"
         android:icon="@drawable/ic_wallet"
