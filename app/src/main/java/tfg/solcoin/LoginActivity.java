@@ -51,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Inicia la actividad de registro de usuario
-                //Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
+                startActivity(intent);
             }
         });
     }
