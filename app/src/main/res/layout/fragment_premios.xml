@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fondoPrincipal"
-    tools:context=".SecondFragment">
+    tools:context=".PremiosFragment">
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="172dp"
         android:layout_height="65dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:text="Premios:"
         android:textSize="40sp"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="51dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button2"
@@ -29,26 +31,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TableLayout
+        android:id="@+id/tablePremios"
         android:layout_width="363dp"
         android:layout_height="418dp"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="140dp">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

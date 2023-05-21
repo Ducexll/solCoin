@@ -1,6 +1,5 @@
 package tfg.solcoin;
 
-import android.content.Intent;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
+
 import androidx.fragment.app.Fragment;
 
 
@@ -16,9 +15,9 @@ import androidx.fragment.app.Fragment;
 public class MenuPrincipal extends AppCompatActivity {
 
     //Declaramos los 3 fragmentos, es decir las 3 vistas
-    FirstFragment firstFragment = new FirstFragment();
-    SecondFragment secondFragment = new SecondFragment();
-    ThirdFragment thirdFragment = new ThirdFragment();
+    InicioFragment firstFragment = new InicioFragment();
+    PremiosFragment secondFragment = new PremiosFragment();
+    ActividadFragment thirdFragment = new ActividadFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
