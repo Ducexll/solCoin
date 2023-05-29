@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,6 +65,21 @@ public class PremiosFragment extends Fragment {
 
         // Obtener los premios desde el web-service
         obtenerPremiosDesdeWebService();
+        Button botonPagar = rootView.findViewById(R.id.buttonPagar);
+        botonPagar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double precioTotal = 0;
+                for(int i=0; i<listaSeleccionados.size(); i++){
+                    if(listaSeleccionados.get(i)){
+                        precioTotal+=listaPremios.get(i).getPrecio();
+                    }
+                }
+                if(precioTotal>0){
+                    restarSaldo(precioTotal);
+                }
+            }
+        });
 
         return rootView;
     }
@@ -86,13 +102,16 @@ public class PremiosFragment extends Fragment {
                                 listaSeleccionados.add(false);
 
                                 TableRow row = new TableRow(getActivity());
+                                /*
                                 row.setClickable(true);
                                 row.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        //Obtener el indice o numero de la fila seleccionada
                                         int index = tablePremios.indexOfChild(row);
-
+                                        //Iterar entre los componentes dentro de la fila
                                         for (int i = 0; i < row.getChildCount(); i++) {
+                                            //Obtener el componente de la fila con indice i
                                             View child = row.getChildAt(i);
                                             if (child instanceof TextView) {
                                                 TextView textView = (TextView) child;
@@ -108,6 +127,7 @@ public class PremiosFragment extends Fragment {
                                     }
                                 });
 
+                                 */
                                 TextView nombreTextView = new TextView(getActivity());
                                 nombreTextView.setText(nombre);
                                 row.addView(nombreTextView);
@@ -121,11 +141,30 @@ public class PremiosFragment extends Fragment {
                                 canjearButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        //Obtener indice de fila en la que se pulsa el boton
                                         int index = tablePremios.indexOfChild(row);
+                                        //Obtener premio que se encuentra en dicho indice
                                         Premio premioSeleccionado = listaPremios.get(index);
 
-                                        if (listaSeleccionados.get(index)) {
-                                            restarSaldo(premioSeleccionado.getPrecio());
+                                        if (!listaSeleccionados.get(index)) { //Si el premio no ha sido seleccionado antes
+                                            listaSeleccionados.set(index, true); //Lo marcamos como seleccionado
+                                            //restarSaldo(premioSeleccionado.getPrecio());
+                                        }else{
+                                            listaSeleccionados.set(index, false);
+                                        }
+                                        //Colorear fila de rojo o negro
+                                        //Iterar entre los componentes dentro de la fila
+                                        for (int i = 0; i < row.getChildCount(); i++) {
+                                            //Obtener el componente de la fila con indice i
+                                            View child = row.getChildAt(i);
+                                            if (child instanceof TextView) {
+                                                TextView textView = (TextView) child;
+                                                if (listaSeleccionados.get(index)) {
+                                                    textView.setTextColor(Color.RED);
+                                                } else {
+                                                    textView.setTextColor(Color.BLACK);
+                                                }
+                                            }
                                         }
                                     }
                                 });
@@ -164,7 +203,7 @@ public class PremiosFragment extends Fragment {
                                 double saldoActual = jsonObject.getDouble("saldo");
                                 double nuevoSaldo = saldoActual - precio;
 
-                                jsonObject.put("saldo", nuevoSaldo); // Actualizar el saldo en el objeto JSON
+                                //jsonObject.put("saldo", nuevoSaldo); // Actualizar el saldo en el objeto JSON
 
                                 String URL_MODIFICAR_SALDO = getString(R.string.url)+"modificarSaldo.php";
                                 StringRequest modificarSaldoRequest = new StringRequest(Request.Method.POST, URL_MODIFICAR_SALDO,
@@ -197,7 +236,8 @@ public class PremiosFragment extends Fragment {
                                     protected Map<String, String> getParams() {
                                         Map<String, String> params = new HashMap<>();
                                         params.put("correo", correo);
-                                        params.put("nuevoSaldo", String.format(Locale.US, "%.2f", nuevoSaldo)); // Enviar el nuevo saldo como número
+                                        //Toast.makeText(getActivity(), "nuevo saldo: " + String.format(Locale.US, "%.2f", nuevoSaldo), Toast.LENGTH_SHORT).show();
+                                        params.put("nuevoSaldo", String.valueOf(nuevoSaldo)); // Enviar el nuevo saldo como número
                                         return params;
                                     }
                                 };

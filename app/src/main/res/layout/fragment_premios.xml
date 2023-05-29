@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonPagar"
         android:layout_width="268dp"
         android:layout_height="49dp"
         android:layout_marginBottom="100dp"
