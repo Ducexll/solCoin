@@ -78,7 +78,7 @@ public class ActividadFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Obtiene los valores de los EditText para el nombre de usuario y contraseña
-                entregarActividad("http://172.31.202.38:80/developjulio/insertarActividad.php");
+                entregarActividad(R.string.url+"insertarActividad.php");
             }
         });
 

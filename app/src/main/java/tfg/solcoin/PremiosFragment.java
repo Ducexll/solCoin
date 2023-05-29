@@ -36,7 +36,7 @@ import java.util.Map;
 
 public class PremiosFragment extends Fragment {
 
-    private static final String URL_PREMIOS = "http://172.31.202.38/developjulio/selecPremios.php";
+    private static final String URL_PREMIOS = R.string.url+"selecPremios.php";
 
     private List<Premio> listaPremios;
     private TableLayout tablePremios;
@@ -151,7 +151,7 @@ public class PremiosFragment extends Fragment {
         SharedPreferences preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String correo = preferencias.getString("correo", "");
 
-        String URL_OBTENER_SALDO = "http://172.31.202.38:80/developjulio/consultarSaldo.php";
+        String URL_OBTENER_SALDO = R.string.url+"consultarSaldo.php";
         StringRequest request = new StringRequest(Request.Method.POST, URL_OBTENER_SALDO,
                 new Response.Listener<String>() {
                     @Override
@@ -164,7 +164,7 @@ public class PremiosFragment extends Fragment {
 
                                 jsonObject.put("saldo", nuevoSaldo); // Actualizar el saldo en el objeto JSON
 
-                                String URL_MODIFICAR_SALDO = "http://172.31.202.38:80/developjulio/modificarSaldo.php";
+                                String URL_MODIFICAR_SALDO = R.string.url+"modificarSaldo.php";
                                 StringRequest modificarSaldoRequest = new StringRequest(Request.Method.POST, URL_MODIFICAR_SALDO,
                                         new Response.Listener<String>() {
                                             @Override
