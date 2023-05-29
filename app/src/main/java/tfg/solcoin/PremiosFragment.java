@@ -144,11 +144,9 @@ public class PremiosFragment extends Fragment {
                                         //Obtener indice de fila en la que se pulsa el boton
                                         int index = tablePremios.indexOfChild(row);
                                         //Obtener premio que se encuentra en dicho indice
-                                        Premio premioSeleccionado = listaPremios.get(index);
 
                                         if (!listaSeleccionados.get(index)) { //Si el premio no ha sido seleccionado antes
                                             listaSeleccionados.set(index, true); //Lo marcamos como seleccionado
-                                            //restarSaldo(premioSeleccionado.getPrecio());
                                         }else{
                                             listaSeleccionados.set(index, false);
                                         }
@@ -189,7 +187,7 @@ public class PremiosFragment extends Fragment {
     }
 
     private void restarSaldo(double precio) {
-        SharedPreferences preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String correo = preferencias.getString("correo", "");
 
         String URL_OBTENER_SALDO = getString(R.string.url)+"consultarSaldo.php";
