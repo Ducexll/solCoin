@@ -29,13 +29,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private String url = R.string.url+"login.php";
+    private String url;
     private SharedPreferences preferencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        url = getString(R.string.url)+"login.php";
 
         // Referencia los EditText para el nombre de usuario y contraseña
         usernameEditText = findViewById(R.id.usernameEditText);

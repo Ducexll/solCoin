@@ -36,7 +36,7 @@ import java.util.Map;
 
 public class PremiosFragment extends Fragment {
 
-    private static final String URL_PREMIOS = R.string.url+"selecPremios.php";
+    private String URL_PREMIOS;
 
     private List<Premio> listaPremios;
     private TableLayout tablePremios;
@@ -59,6 +59,8 @@ public class PremiosFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_premios, container, false);
         tablePremios = rootView.findViewById(R.id.tablePremios);
+
+        URL_PREMIOS = getString(R.string.url)+"selecPremios.php";
 
         // Obtener los premios desde el web-service
         obtenerPremiosDesdeWebService();
@@ -151,7 +153,7 @@ public class PremiosFragment extends Fragment {
         SharedPreferences preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String correo = preferencias.getString("correo", "");
 
-        String URL_OBTENER_SALDO = R.string.url+"consultarSaldo.php";
+        String URL_OBTENER_SALDO = getString(R.string.url)+"consultarSaldo.php";
         StringRequest request = new StringRequest(Request.Method.POST, URL_OBTENER_SALDO,
                 new Response.Listener<String>() {
                     @Override
@@ -164,7 +166,7 @@ public class PremiosFragment extends Fragment {
 
                                 jsonObject.put("saldo", nuevoSaldo); // Actualizar el saldo en el objeto JSON
 
-                                String URL_MODIFICAR_SALDO = R.string.url+"modificarSaldo.php";
+                                String URL_MODIFICAR_SALDO = getString(R.string.url)+"modificarSaldo.php";
                                 StringRequest modificarSaldoRequest = new StringRequest(Request.Method.POST, URL_MODIFICAR_SALDO,
                                         new Response.Listener<String>() {
                                             @Override

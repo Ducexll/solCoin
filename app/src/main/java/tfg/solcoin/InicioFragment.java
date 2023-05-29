@@ -62,7 +62,7 @@ public class InicioFragment extends Fragment {
 
     private void obtenerSaldoDesdeWebService(String correo) {
         // Realiza la solicitud HTTP al web-service consultarSaldo
-        String urlConsultaSaldo = R.string.url+"consultarSaldo.php";
+        String urlConsultaSaldo = getString(R.string.url)+"consultarSaldo.php";
 
         StringRequest solicitud = new StringRequest(Request.Method.POST, urlConsultaSaldo,
                 new Response.Listener<String>() {
