@@ -62,7 +62,7 @@ public class InicioFragment extends Fragment {
 
     private void obtenerSaldoDesdeWebService(String correo) {
         // Realiza la solicitud HTTP al web-service consultarSaldo
-        String urlConsultaSaldo = "http://192.168.83.201:80/developjulio/consultarSaldo.php";
+        String urlConsultaSaldo = "http://172.31.202.38:80/developjulio/consultarSaldo.php";
 
         StringRequest solicitud = new StringRequest(Request.Method.POST, urlConsultaSaldo,
                 new Response.Listener<String>() {

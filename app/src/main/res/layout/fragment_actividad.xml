@@ -36,12 +36,12 @@
         app:layout_constraintTop_toBottomOf="@+id/spinnerTrimestre" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextNumSesiones"
         android:layout_width="134dp"
         android:layout_height="38dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/textViewSesiones"
         app:layout_constraintTop_toBottomOf="@+id/textViewSesiones" />
 
@@ -51,16 +51,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Numero de alumnos:"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintStart_toStartOf="@+id/editTextNumSesiones"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumSesiones" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editTextNumAlumnos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -70,8 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Ti`po de mantenimiento:"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toStartOf="@+id/editTextNumAlumnos"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumAlumnos" />
 
     <Spinner
         android:id="@+id/spinnerTipoActividad"

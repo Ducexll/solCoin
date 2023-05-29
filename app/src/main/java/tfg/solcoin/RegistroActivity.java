@@ -75,7 +75,7 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validatePasswords()) {
-                    ejecutarServicio("http://192.168.83.201:80/developjulio/insertarUsuario.php");
+                    ejecutarServicio("http://172.31.202.38:80/developjulio/insertarUsuario.php");
                 } else {
                     Toast.makeText(RegistroActivity.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
                 }

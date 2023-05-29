@@ -1,18 +1,37 @@
 package tfg.solcoin;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ActividadFragment extends Fragment {
 
     private Spinner spTrimestre,spTipoActividad ;
+    private Button botonEntrega;
+    private EditText numSesiones, numAlumnos;
 
     public ActividadFragment() {
         // Constructor público vacío requerido
@@ -54,6 +73,128 @@ public class ActividadFragment extends Fragment {
         adapterTipoActividad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spTipoActividad.setAdapter(adapterTipoActividad);
 
+        botonEntrega = view.findViewById(R.id.button);
+        botonEntrega.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Obtiene los valores de los EditText para el nombre de usuario y contraseña
+                entregarActividad("http://172.31.202.38:80/developjulio/insertarActividad.php");
+            }
+        });
+
+        numSesiones = view.findViewById(R.id.editTextNumSesiones);
+        numAlumnos = view.findViewById(R.id.editTextNumAlumnos);
+
         return view;
     }
+
+    public void entregarActividad(String URL){
+        SharedPreferences preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        String correo = preferencias.getString("correo", "");
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getActivity(), "Entrega realizada. A la espera de confirmación", Toast.LENGTH_SHORT).show();
+                //goToLogin();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros = new HashMap<String,String>();
+                parametros.put("correo",correo);
+                parametros.put("trimestre",verTrimestre());
+                parametros.put("sesionesEmpleadas",numSesiones.getText().toString());
+                parametros.put("numAlumnos",numAlumnos.getText().toString());
+                parametros.put("tipo",spTipoActividad.getSelectedItem().toString());
+                parametros.put("remuneracion",calcularRemuneración());
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
+
+    public String verTrimestre(){
+        String trimestreElegido = spTrimestre.getSelectedItem().toString();
+        switch (trimestreElegido){
+            case "Primer trimestre":
+                return "Primero";
+            case "Segundo trimestre":
+                return "Segundo";
+            case "Tercer trimestre":
+                return "Tercero";
+            default:
+                return null;
+        }
+    }
+
+    public String calcularRemuneración(){
+        int remuneracion=0;
+
+        String trimestreElegido = spTrimestre.getSelectedItem().toString();
+        switch (trimestreElegido){
+            case "Primer trimestre":
+                remuneracion+=1;
+            case "Segundo trimestre":
+                remuneracion+=3;
+            case "Tercer trimestre":
+                remuneracion+=5;
+            default:
+                remuneracion+=0;
+        }
+
+        String tipo = spTipoActividad.getSelectedItem().toString();
+        switch (tipo){
+            case "Preventivo":
+                remuneracion+=1;
+            case "Obligatorio":
+                remuneracion+=3;
+            case "Correctivo":
+                remuneracion+=5;
+            default:
+                remuneracion+=0;
+        }
+
+
+        int alumnos = Integer.parseInt(numAlumnos.getText().toString());
+        switch (alumnos){
+            case 1:
+                remuneracion+=5;
+            case 2:
+                remuneracion+=3;
+            case 3:
+                remuneracion+=1;
+            default:
+                remuneracion+=0;
+        }
+
+        int sesiones = Integer.parseInt(numSesiones.getText().toString());
+        switch (sesiones){
+            case 1:
+                remuneracion+=5;
+            case 2:
+                remuneracion+=3;
+            case 3:
+                remuneracion+=1;
+            default:
+                remuneracion+=0;
+        }
+        //En caso de que las sesiones sean mayor que 3 la remuneración sera 0
+        if (Integer.parseInt(numSesiones.getText().toString()) > 3) {
+            remuneracion = 0;
+        }
+
+
+
+        return Integer.toString(remuneracion);
+
+}
+
 }

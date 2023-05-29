@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private String url = "http://192.168.83.201:80/developjulio/login.php";
+    private String url = "http://172.31.202.38:80/developjulio/login.php";
     private SharedPreferences preferencias;
 
     @Override
