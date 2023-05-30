@@ -45,6 +45,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 return false;
             }
         });
+
     }
         //LLega el nuevo fragmento y se reemplaza
         public void loadFragment(Fragment fragment){

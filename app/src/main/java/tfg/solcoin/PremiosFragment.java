@@ -29,7 +29,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -61,6 +65,9 @@ public class PremiosFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_premios, container, false);
         tablePremios = rootView.findViewById(R.id.tablePremios);
 
+        preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        String correo = preferencias.getString("correo", "");
+
         URL_PREMIOS = getString(R.string.url)+"selecPremios.php";
 
         // Obtener los premios desde el web-service
@@ -73,6 +80,9 @@ public class PremiosFragment extends Fragment {
                 for(int i=0; i<listaSeleccionados.size(); i++){
                     if(listaSeleccionados.get(i)){
                         precioTotal+=listaPremios.get(i).getPrecio();
+                        Premio p = listaPremios.get(i);
+                        int id = p.getIdPremio();
+                        canjear(correo,id);
                     }
                 }
                 if(precioTotal>0){
@@ -234,7 +244,6 @@ public class PremiosFragment extends Fragment {
                                     protected Map<String, String> getParams() {
                                         Map<String, String> params = new HashMap<>();
                                         params.put("correo", correo);
-                                        //Toast.makeText(getActivity(), "nuevo saldo: " + String.format(Locale.US, "%.2f", nuevoSaldo), Toast.LENGTH_SHORT).show();
                                         params.put("nuevoSaldo", String.valueOf(nuevoSaldo)); // Enviar el nuevo saldo como número
                                         return params;
                                     }
@@ -269,7 +278,45 @@ public class PremiosFragment extends Fragment {
         requestQueue.add(request);
     }
 
+    private void canjear(String correo, int idPremio){
+        String URL_CANJEAR = getString(R.string.url)+"insertarCompra.php";
+        StringRequest request = new StringRequest(Request.Method.POST, URL_CANJEAR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObjectres = new JSONObject(response);
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("correo", correo);
+                params.put("premio", String.valueOf(idPremio));
+                /*
+                Date date = Calendar.getInstance().getTime();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                String strDate = dateFormat.format(date);
+                params.put("fecha",strDate);
+
+                 */
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
+    }
 
 
 

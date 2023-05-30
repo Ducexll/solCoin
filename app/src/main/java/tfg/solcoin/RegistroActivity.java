@@ -31,7 +31,7 @@ import javax.net.ssl.SSLSession;
 public class RegistroActivity extends AppCompatActivity {
 
     private EditText passwordEditText, nombreEditText, correoEditText, confirmPasswordEditText;
-    private Spinner spCurso, spClase;
+    private Spinner spCurso, spClase, spTurno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class RegistroActivity extends AppCompatActivity {
         correoEditText = findViewById(R.id.editTextCorreo);
         spCurso = findViewById(R.id.spinnerCurso);
         spClase = findViewById(R.id.spinnerClase);
+        spTurno = findViewById(R.id.spinnerTurno);
 
         ArrayList<String> opcionesCurso = new ArrayList<String>();
         opcionesCurso.add("1");
@@ -55,10 +56,17 @@ public class RegistroActivity extends AppCompatActivity {
 
         ArrayList<String> opcionesClase = new ArrayList<String>();
         opcionesClase.add("SMR");
-        opcionesClase.add("DAM");
+        opcionesClase.add("ASIR");
 
         ArrayAdapter<String> adapterClase = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opcionesClase);
         spClase.setAdapter(adapterClase);
+
+        ArrayList<String> opcionesTurno = new ArrayList<String>();
+        opcionesTurno.add("Diurno");
+        opcionesTurno.add("Vespertino");
+
+        ArrayAdapter<String> adapterTurno = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opcionesTurno);
+        spTurno.setAdapter(adapterTurno);
 
         // Deshabilitar verificación de SSL (NO RECOMENDADO PARA PRODUCCIÓN)
         // Asegúrate de que esto solo se utilice para fines de prueba y desarrollo
@@ -122,6 +130,8 @@ public class RegistroActivity extends AppCompatActivity {
                 parametros.put("contrasenna",passwordEditText.getText().toString());
                 parametros.put("curso",spCurso.getSelectedItem().toString());
                 parametros.put("clase",spClase.getSelectedItem().toString());
+                String letraTurno = spTurno.getSelectedItem().toString().substring(0,1);
+                parametros.put("turno",letraTurno);
                 return parametros;
             }
         };
