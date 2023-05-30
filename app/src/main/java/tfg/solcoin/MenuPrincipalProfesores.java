@@ -12,17 +12,17 @@ import androidx.fragment.app.Fragment;
 
 
 
-public class MenuPrincipal extends AppCompatActivity {
+public class MenuPrincipalProfesores extends AppCompatActivity {
 
     //Declaramos los 3 fragmentos, es decir las 3 vistas
-    InicioFragment firstFragment = new InicioFragment();
-    PremiosFragment secondFragment = new PremiosFragment();
-    ActividadFragment thirdFragment = new ActividadFragment();
+    ConfirmarActividadesFragment firstFragment = new ConfirmarActividadesFragment();
+    VerPremiosCanjeadosFragment secondFragment = new VerPremiosCanjeadosFragment();
+    AnadirPremioFragment thirdFragment = new AnadirPremioFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_principal);
+        setContentView(R.layout.activity_menu_principal_profesores);
 
         //Referenciamos el bottom navigation y le ponemos y listener
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
@@ -47,11 +47,11 @@ public class MenuPrincipal extends AppCompatActivity {
         });
         loadFragment(firstFragment);
     }
-        //LLega el nuevo fragmento y se reemplaza
-        public void loadFragment(Fragment fragment){
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_container, fragment);
-            transaction.commit();
-        }
+    //LLega el nuevo fragmento y se reemplaza
+    public void loadFragment(Fragment fragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.commit();
+}
 
 }

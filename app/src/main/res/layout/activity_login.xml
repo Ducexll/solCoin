@@ -38,4 +38,10 @@
         android:layout_height="wrap_content"
         android:text="Registrarse" />
 
+    <Button
+        android:id="@+id/registerProfesoresButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REGISTRARSE(profesores)" />
+
 </LinearLayout>

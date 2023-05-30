@@ -66,6 +66,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Referencia el botón de registro profesoresy agrega un listener
+        Button registerProfesoresButton = findViewById(R.id.registerProfesoresButton);
+        registerProfesoresButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Inicia la actividad de registro de profesores
+                Intent intent = new Intent(LoginActivity.this, RegistroProfesoresActivity.class);
+                startActivity(intent);
+            }
+        });
+
         preferencias = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
     }
 
@@ -85,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                                     String correo = datosUsuario.getString("correo");
                                     String nombre = datosUsuario.getString("nombre");
                                     String contrasenna = datosUsuario.getString("contrasenna");
+                                    String tipo = datosUsuario.getString("tipo");
 
 
                                     //Guardamos el correo en preferencias
@@ -94,19 +106,24 @@ public class LoginActivity extends AppCompatActivity {
                                     String correopref = preferencias.getString("correo","correo error");
                                     Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso con correo: " + correopref, Toast.LENGTH_SHORT).show();
 
-                                    // Por ejemplo, puedes guardar el estado de inicio de sesión en SharedPreferences y abrir la siguiente actividad
-                                    // Guardar el estado de inicio de sesión en SharedPreferences
-                                    // SharedPreferences sharedPreferences = getSharedPreferences("nombre_preferencias", MODE_PRIVATE);
-                                    // SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    // editor.putBoolean("sesion_iniciada", true);
-                                    // editor.apply();
-                                    // Abrir la siguiente actividad
-                                    // Intent intent = new Intent(LoginActivity.this, MenuPrincipal.class);
-                                    // startActivity(intent);
-                                    // finish();
-                                    Intent intent = new Intent(LoginActivity.this, MenuPrincipal.class);
-                                    startActivity(intent);
-                                    finish();
+
+                                    if ( tipo.equals("profesor")){
+
+                                        Intent intent = new Intent(LoginActivity.this, MenuPrincipalProfesores.class);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                                    else{
+                                        Intent intent = new Intent(LoginActivity.this, MenuPrincipal.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
+
+
+
+
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Nombre de usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                                 }
