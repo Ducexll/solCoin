@@ -73,17 +73,25 @@ public class ActividadFragment extends Fragment {
         adapterTipoActividad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spTipoActividad.setAdapter(adapterTipoActividad);
 
+        numSesiones = view.findViewById(R.id.editTextNumSesiones);
+        numAlumnos = view.findViewById(R.id.editTextNumAlumnos);
+
         botonEntrega = view.findViewById(R.id.button);
         botonEntrega.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Obtiene los valores de los EditText para el nombre de usuario y contraseña
-                entregarActividad(getString(R.string.url)+"insertarActividad.php");
+                String trimestre = spTrimestre.getSelectedItem().toString();
+                String tipoAct = spTipoActividad.getSelectedItem().toString();
+                String numAl = numAlumnos.getText().toString();
+                String numSes = numSesiones.getText().toString();
+
+                if(trimestre.equals("") || tipoAct.equals("") || numAl.equals("") || numSes.equals("")){
+                    Toast.makeText(getActivity(), "Debe rellenar todos los campos del formulario", Toast.LENGTH_SHORT);
+                }else{
+                    entregarActividad(getString(R.string.url)+"insertarActividad.php");
+                }
             }
         });
-
-        numSesiones = view.findViewById(R.id.editTextNumSesiones);
-        numAlumnos = view.findViewById(R.id.editTextNumAlumnos);
 
         return view;
     }

@@ -7,4 +7,6 @@
     <string name="url">http://192.168.1.148:80/phpSolCoin/</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tituloActividades">Actividades</string>
+    <string name="confirmar_actividades">confirmar ACTIVIDADES</string>
 </resources>
