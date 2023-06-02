@@ -8,8 +8,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="fondoPrincipal">#697071</color>
     <color name="fondoBotones">#2FCDD1</color>
+
+        <color name="gris_oscuro">#333333</color>
+        <color name="fondo_Principal">#808080</color>
+        <color name="fondo_botones">#F3F781</color>
+        <color name="gris_claro">#CCCCCC</color>
+        <color name="azul_oscuro">#003366</color>
+        <color name="azul_medio">#336699</color>
+        <color name="azul_claro">#66B2FF</color>
+
 
 
 

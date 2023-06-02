@@ -8,27 +8,6 @@
     tools:context=".ConfirmarActividadesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:contentDescription="Actividades entregadas por los alunos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32"
-        tools:ignore="HardcodedText">
-
-        <TableLayout
-            android:id="@+id/tablaActEntregadas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp" />
-    </ScrollView>
 
     <TextView
         android:id="@+id/textView"
@@ -40,14 +19,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/confirmar_actividades"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="410dp"
+        android:layout_height="574dp"
+        android:contentDescription="Actividades entregadas a la espera de confirmación"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableLayout
+            android:id="@+id/tablaActEntregadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     android:id="@+id/Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fondoPrincipal"
+    android:background="@color/fondo_Principal"
     tools:context=".InicioFragment">
 
     <Button

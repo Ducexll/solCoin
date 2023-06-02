@@ -82,7 +82,7 @@ public class PremiosFragment extends Fragment {
                         precioTotal+=listaPremios.get(i).getPrecio();
                         Premio p = listaPremios.get(i);
                         int id = p.getIdPremio();
-                        canjear(correo,id);
+                        canjear(correo,id, listaPremios.get(i).getNombre());
                     }
                 }
                 if(precioTotal>0){
@@ -95,14 +95,13 @@ public class PremiosFragment extends Fragment {
     }
 
     private void obtenerPremiosDesdeWebService() {
-        StringRequest request = new StringRequest(Request.Method.GET, URL_PREMIOS,
-                new Response.Listener<String>() {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL_PREMIOS, null,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONArray response) {
                         try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject premioObj = jsonArray.getJSONObject(i);
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject premioObj = response.getJSONObject(i);
                                 int id = premioObj.getInt("idPremios");
                                 String nombre = premioObj.getString("nombre");
                                 double precio = premioObj.getDouble("precio");
@@ -112,32 +111,6 @@ public class PremiosFragment extends Fragment {
                                 listaSeleccionados.add(false);
 
                                 TableRow row = new TableRow(getActivity());
-                                /*
-                                row.setClickable(true);
-                                row.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        //Obtener el indice o numero de la fila seleccionada
-                                        int index = tablePremios.indexOfChild(row);
-                                        //Iterar entre los componentes dentro de la fila
-                                        for (int i = 0; i < row.getChildCount(); i++) {
-                                            //Obtener el componente de la fila con indice i
-                                            View child = row.getChildAt(i);
-                                            if (child instanceof TextView) {
-                                                TextView textView = (TextView) child;
-                                                if (listaSeleccionados.get(index)) {
-                                                    textView.setTextColor(Color.BLACK);
-                                                } else {
-                                                    textView.setTextColor(Color.RED);
-                                                }
-                                            }
-                                        }
-
-                                        listaSeleccionados.set(index, !listaSeleccionados.get(index));
-                                    }
-                                });
-
-                                 */
                                 TextView nombreTextView = new TextView(getActivity());
                                 nombreTextView.setText(nombre);
                                 row.addView(nombreTextView);
@@ -151,19 +124,15 @@ public class PremiosFragment extends Fragment {
                                 canjearButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //Obtener indice de fila en la que se pulsa el boton
                                         int index = tablePremios.indexOfChild(row);
-                                        //Obtener premio que se encuentra en dicho indice
 
-                                        if (!listaSeleccionados.get(index)) { //Si el premio no ha sido seleccionado antes
-                                            listaSeleccionados.set(index, true); //Lo marcamos como seleccionado
-                                        }else{
+                                        if (!listaSeleccionados.get(index)) {
+                                            listaSeleccionados.set(index, true);
+                                        } else {
                                             listaSeleccionados.set(index, false);
                                         }
-                                        //Colorear fila de rojo o negro
-                                        //Iterar entre los componentes dentro de la fila
+
                                         for (int i = 0; i < row.getChildCount(); i++) {
-                                            //Obtener el componente de la fila con indice i
                                             View child = row.getChildAt(i);
                                             if (child instanceof TextView) {
                                                 TextView textView = (TextView) child;
@@ -278,7 +247,7 @@ public class PremiosFragment extends Fragment {
         requestQueue.add(request);
     }
 
-    private void canjear(String correo, int idPremio){
+    private void canjear(String correo, int idPremio, String nombre){
 
         String URL_CANJEAR = getString(R.string.url)+"insertarCompra.php";
         StringRequest request = new StringRequest(Request.Method.POST, URL_CANJEAR,
@@ -307,6 +276,7 @@ public class PremiosFragment extends Fragment {
                 Map<String, String> params = new HashMap<>();
                 params.put("correo", correo);
                 params.put("premio", String.valueOf(idPremio));
+                params.put("nombre", nombre);
 
 
 

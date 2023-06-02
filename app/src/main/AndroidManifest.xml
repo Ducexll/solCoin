@@ -11,18 +11,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SolCoin"
+        android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
         <activity
             android:name=".RegistroActivity"
             android:exported="false">
+
         </activity>
 
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,23 +34,27 @@
 
         <activity
             android:name=".MenuPrincipal"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".RegistroProfesoresActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".MenuPrincipalProfesores"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
 
         <activity
             android:name=".PremiosFragment"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
     </application>
