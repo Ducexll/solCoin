@@ -4,4 +4,6 @@
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Configuraciones adicionales si las tienes -->
     </style>
+
+
 </resources>

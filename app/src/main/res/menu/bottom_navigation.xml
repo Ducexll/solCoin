@@ -8,10 +8,10 @@
     <item
         android:id="@+id/secondFrangment"
         android:icon="@drawable/ic_regalo"
-        android:title="Premios" />
+        android:title="Recompensas" />
     <item
         android:id="@+id/thirdFrangment"
         android:icon="@drawable/ic_wallet"
-        android:title="Cartera" />
+        android:title="Actividades" />
 
 </menu>

@@ -11,90 +11,33 @@
         android:id="@+id/btnEnviar"
         android:layout_width="310dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="100dp"
-        android:background="@color/fondoBotones"
-        android:text="Pagar"
+        android:layout_marginBottom="160dp"
+        android:background="@drawable/boton_redondeado"
+        android:text="Cerrar sesión"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="383dp"
-        android:layout_height="266dp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnEnviar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="164dp"
-            android:layout_weight="1"
-            android:text="Pago 1" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="164dp"
-            android:layout_weight="1"
-            android:text="Ingreso1" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="164dp"
-            android:layout_weight="1"
-            android:text="ingreso2" />
-
-
-    </TableLayout>
-
-    <TextView
-        android:id="@+id/cartelUltimasTransacciones"
-        android:layout_width="237dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="25dp"
-        android:text="Ultimas Transacciones"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="41dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:clickable="true"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_siluetapersona"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textViewSaldo"
         android:layout_width="149dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="132dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="228dp"
         android:textSize="50sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnEnviar"
+        app:layout_constraintStart_toStartOf="@+id/btnEnviar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/EtiquetaSaldo"
-        android:layout_width="72dp"
-        android:layout_height="32dp"
+        android:id="@+id/EtiquetaInicio"
+        android:layout_width="266dp"
+        android:layout_height="52dp"
         android:layout_marginBottom="8dp"
-        android:text="Saldo:"
-        android:textSize="16sp"
+        android:text="Saldo Disponible:"
+        android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewSaldo"
         app:layout_constraintEnd_toEndOf="@+id/textViewSaldo"
         app:layout_constraintHorizontal_bias="0.493"

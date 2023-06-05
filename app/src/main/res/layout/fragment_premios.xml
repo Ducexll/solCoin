@@ -9,12 +9,12 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="172dp"
+        android:layout_width="0dp"
         android:layout_height="65dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="Premios:"
+        android:text="Lista de premios:"
         android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,20 +23,28 @@
         android:layout_width="268dp"
         android:layout_height="49dp"
         android:layout_marginBottom="100dp"
-        android:background="@color/fondoBotones"
+        android:background="@drawable/boton_redondeado"
         android:text="Canjear Premio"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TableLayout
-        android:id="@+id/tablePremios"
-        android:layout_width="363dp"
-        android:layout_height="418dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+    <ScrollView
+        android:layout_width="412dp"
+        android:layout_height="540dp"
+        android:contentDescription="Lista de premios canjeables"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableLayout
+            android:id="@+id/tablePremios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

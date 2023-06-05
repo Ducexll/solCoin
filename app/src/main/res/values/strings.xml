@@ -4,9 +4,30 @@
     <string name="pagos">Pagos</string>
     <string name="cartera">Cartera</string>
     <string name="saldo">100</string>
-    <string name="url">http://192.168.83.201:80/developjulio/</string>
+    <string name="url">http://192.168.1.148:80/phpSolCoin/</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tituloActividades">Actividades</string>
     <string name="confirmar_actividades">confirmar ACTIVIDADES</string>
+    <string name="solcoin">Solcoin</string>
+    <string name="introduce_el_correo_eletronico">Introduce el correo eletronico</string>
+    <string name="introduce_la_contrase_a">Introduce la contraseña</string>
+    <string name="iniciar_sesi_n">Iniciar Sesión</string>
+    <string name="registrarse_alumnos">Registrarse (Alumnos)</string>
+    <string name="registrarse_profesores">Registrarse (Profesores)</string>
+    <string name="curso">Curso</string>
+    <string name="registrar">Registrar</string>
+    <string name="clase">Clase</string>
+    <string name="turno">Turno</string>
+    <string name="ingresa_la_contrase_a">Ingresa la contraseña</string>
+    <string name="ingrese_de_nuevo_la_contrase_a">Ingrese de nuevo la contraseña</string>
+    <string name="ingresa_el_nombre">Ingresa el Nombre</string>
+    <string name="ingresa_el_correo_electronico">Ingresa el correo electronico</string>
+    <string name="_1_smr_d">1-SMR-D</string>
+    <string name="_1_asir_v">1-ASIR-V</string>
+    <string name="_1_smr_v">1-SMR-V</string>
+    <string name="_2_smr_d">2-SMR-D</string>
+    <string name="_2_asir_v">2-ASIR-V</string>
+    <string name="introduce_la_contrase_a_de_docente">Introduce la contraseña de docente</string>
+    <string name="_2_smr_v">2-SMR-V</string>
 </resources>

@@ -76,17 +76,11 @@ public class PremiosFragment extends Fragment {
         botonPagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double precioTotal = 0;
-                for(int i=0; i<listaSeleccionados.size(); i++){
-                    if(listaSeleccionados.get(i)){
-                        precioTotal+=listaPremios.get(i).getPrecio();
-                        Premio p = listaPremios.get(i);
-                        int id = p.getIdPremio();
-                        canjear(correo,id, listaPremios.get(i).getNombre());
-                    }
-                }
+                double precioTotal = obtenerPrecioTotal();
                 if(precioTotal>0){
                     restarSaldo(precioTotal);
+                }else{
+                    Toast.makeText(getActivity(),"Debe seleccionar algún premio",Toast.LENGTH_SHORT);
                 }
             }
         });
@@ -95,13 +89,14 @@ public class PremiosFragment extends Fragment {
     }
 
     private void obtenerPremiosDesdeWebService() {
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL_PREMIOS, null,
-                new Response.Listener<JSONArray>() {
+        StringRequest request = new StringRequest(Request.Method.GET, URL_PREMIOS,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(String response) {
                         try {
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject premioObj = response.getJSONObject(i);
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject premioObj = jsonArray.getJSONObject(i);
                                 int id = premioObj.getInt("idPremios");
                                 String nombre = premioObj.getString("nombre");
                                 double precio = premioObj.getDouble("precio");
@@ -111,12 +106,25 @@ public class PremiosFragment extends Fragment {
                                 listaSeleccionados.add(false);
 
                                 TableRow row = new TableRow(getActivity());
+
                                 TextView nombreTextView = new TextView(getActivity());
                                 nombreTextView.setText(nombre);
+                                TableRow.LayoutParams parametrosNombre = new TableRow.LayoutParams(
+                                        0,
+                                        TableRow.LayoutParams.WRAP_CONTENT,
+                                        1 // Peso inicial
+                                );
+                                nombreTextView.setLayoutParams(parametrosNombre);
                                 row.addView(nombreTextView);
 
                                 TextView precioTextView = new TextView(getActivity());
                                 precioTextView.setText(String.valueOf(precio));
+                                TableRow.LayoutParams parametrosPrecio = new TableRow.LayoutParams(
+                                        0,
+                                        TableRow.LayoutParams.WRAP_CONTENT,
+                                        1 // Peso inicial
+                                );
+                                precioTextView.setLayoutParams(parametrosPrecio);
                                 row.addView(precioTextView);
 
                                 Button canjearButton = new Button(getActivity());
@@ -124,20 +132,24 @@ public class PremiosFragment extends Fragment {
                                 canjearButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        //Obtener indice de fila en la que se pulsa el boton
                                         int index = tablePremios.indexOfChild(row);
+                                        //Obtener premio que se encuentra en dicho indice
 
-                                        if (!listaSeleccionados.get(index)) {
-                                            listaSeleccionados.set(index, true);
-                                        } else {
+                                        if (!listaSeleccionados.get(index)) { //Si el premio no ha sido seleccionado antes
+                                            listaSeleccionados.set(index, true); //Lo marcamos como seleccionado
+                                        }else{
                                             listaSeleccionados.set(index, false);
                                         }
-
-                                        for (int i = 0; i < row.getChildCount(); i++) {
+                                        //Colorear fila de rojo o negro
+                                        //Iterar entre los componentes dentro de la fila
+                                        for (int i = 0; i < row.getChildCount()-1; i++) {
+                                            //Obtener el componente de la fila con indice i
                                             View child = row.getChildAt(i);
                                             if (child instanceof TextView) {
                                                 TextView textView = (TextView) child;
                                                 if (listaSeleccionados.get(index)) {
-                                                    textView.setTextColor(Color.RED);
+                                                    textView.setTextColor(Color.YELLOW);
                                                 } else {
                                                     textView.setTextColor(Color.BLACK);
                                                 }
@@ -145,8 +157,24 @@ public class PremiosFragment extends Fragment {
                                         }
                                     }
                                 });
+                                canjearButton.setBackgroundResource(R.drawable.boton_redondeado);
+                                TableRow.LayoutParams parametrosCanjea = new TableRow.LayoutParams(
+                                        0,
+                                        TableRow.LayoutParams.WRAP_CONTENT,
+                                        1 // Peso inicial
+                                );
+                                canjearButton.setLayoutParams(parametrosCanjea);
                                 row.addView(canjearButton);
 
+                                TableRow.LayoutParams params = new TableRow.LayoutParams(
+                                        TableRow.LayoutParams.WRAP_CONTENT,
+                                        TableRow.LayoutParams.WRAP_CONTENT,
+                                        1 // Peso deseado
+                                );
+
+                                // Establece el peso en la fila
+                                row.setLayoutParams(params);
+                                row.setPadding(10,10,10,10);
                                 tablePremios.addView(row);
                             }
                         } catch (JSONException e) {
@@ -180,46 +208,49 @@ public class PremiosFragment extends Fragment {
                                 double saldoActual = jsonObject.getDouble("saldo");
                                 double nuevoSaldo = saldoActual - precio;
 
-                                //jsonObject.put("saldo", nuevoSaldo); // Actualizar el saldo en el objeto JSON
+                                if(nuevoSaldo>=0) {
+                                    String URL_MODIFICAR_SALDO = getString(R.string.url) + "modificarSaldo.php";
+                                    StringRequest modificarSaldoRequest = new StringRequest(Request.Method.POST, URL_MODIFICAR_SALDO,
+                                            new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
+                                                    try {
+                                                        JSONObject jsonObject = new JSONObject(response);
+                                                        String estado = jsonObject.getString("estado");
+                                                        String mensaje = jsonObject.getString("mensaje");
+                                                        if (estado.equals("exito")) {
+                                                            // Saldo actualizado correctamente
+                                                            // Aquí puedes realizar cualquier acción adicional necesaria
+                                                        } else {
+                                                            // Error al actualizar el saldo
 
-                                String URL_MODIFICAR_SALDO = getString(R.string.url)+"modificarSaldo.php";
-                                StringRequest modificarSaldoRequest = new StringRequest(Request.Method.POST, URL_MODIFICAR_SALDO,
-                                        new Response.Listener<String>() {
-                                            @Override
-                                            public void onResponse(String response) {
-                                                try {
-                                                    JSONObject jsonObject = new JSONObject(response);
-                                                    String estado = jsonObject.getString("estado");
-                                                    String mensaje = jsonObject.getString("mensaje");
-                                                    if (estado.equals("exito")) {
-                                                        // Saldo actualizado correctamente
-                                                        // Aquí puedes realizar cualquier acción adicional necesaria
-                                                    } else {
-                                                        // Error al actualizar el saldo
-
+                                                        }
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
                                                     }
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
                                                 }
-                                            }
-                                        },
-                                        new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                error.printStackTrace();
-                                            }
-                                        }) {
-                                    @Override
-                                    protected Map<String, String> getParams() {
-                                        Map<String, String> params = new HashMap<>();
-                                        params.put("correo", correo);
-                                        params.put("nuevoSaldo", String.valueOf(nuevoSaldo)); // Enviar el nuevo saldo como número
-                                        return params;
-                                    }
-                                };
+                                            },
+                                            new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    error.printStackTrace();
+                                                }
+                                            }) {
+                                        @Override
+                                        protected Map<String, String> getParams() {
+                                            Map<String, String> params = new HashMap<>();
+                                            params.put("correo", correo);
+                                            params.put("nuevoSaldo", String.valueOf(nuevoSaldo)); // Enviar el nuevo saldo como número
+                                            return params;
+                                        }
+                                    };
 
-                                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-                                requestQueue.add(modificarSaldoRequest);
+                                    RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+                                    requestQueue.add(modificarSaldoRequest);
+                                    canjear(correo);
+                                }else{
+                                    Toast.makeText(getActivity(),"No hay saldo suficiente",Toast.LENGTH_SHORT);
+                                }
                             } else {
                                 // No se encontró el saldo del usuario
 
@@ -247,47 +278,57 @@ public class PremiosFragment extends Fragment {
         requestQueue.add(request);
     }
 
-    private void canjear(String correo, int idPremio, String nombre){
-
+    private void canjear(String correo){
         String URL_CANJEAR = getString(R.string.url)+"insertarCompra.php";
-        StringRequest request = new StringRequest(Request.Method.POST, URL_CANJEAR,
-                new Response.Listener<String>() {
+        for(int i=0; i<listaSeleccionados.size(); i++){
+            if(listaSeleccionados.get(i)){
+                int id = listaPremios.get(i).getIdPremio();
+                StringRequest request = new StringRequest(Request.Method.POST, URL_CANJEAR,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObjectres = new JSONObject(response);
+                                    Toast.makeText(getActivity(), "Correo: " + correo + "\nPremio: " + id, Toast.LENGTH_SHORT).show();
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        }) {
                     @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObjectres = new JSONObject(response);
-                            Toast.makeText(getActivity(), "Correo: " + correo + "\nPremio: " + idPremio, Toast.LENGTH_SHORT).show();
+                    protected Map<String, String> getParams() {
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        Map<String, String> params = new HashMap<>();
+                        params.put("correo", correo);
+                        params.put("premio", String.valueOf(id));
+
+
+
+                        return params;
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }) {
+                };
 
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<>();
-                params.put("correo", correo);
-                params.put("premio", String.valueOf(idPremio));
-                params.put("nombre", nombre);
-
-
-
-                return params;
+                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+                requestQueue.add(request);
             }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-        requestQueue.add(request);
+        }
     }
 
-
+    private double obtenerPrecioTotal(){
+        double precioTotal=0;
+        for(int i=0; i<listaSeleccionados.size(); i++){
+            if(listaSeleccionados.get(i)){
+                precioTotal+=listaPremios.get(i).getPrecio();
+            }
+        }
+        return precioTotal;
+    }
 
 }

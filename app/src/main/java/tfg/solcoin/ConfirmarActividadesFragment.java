@@ -161,7 +161,7 @@ public class ConfirmarActividadesFragment extends Fragment {
                                         1 // Peso inicial
                                 );
                                 verButton.setLayoutParams(parametrosDetalles);
-
+                                verButton.setBackgroundResource(R.drawable.boton_redondeado);
                                 row.addView(verButton);
 
                                 TableRow.LayoutParams params = new TableRow.LayoutParams(
@@ -215,7 +215,9 @@ public class ConfirmarActividadesFragment extends Fragment {
                 .setNegativeButton("Rechazar entrega", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         rechazarEntrega(id);
+                        // Acción al hacer clic en el botón "Cancelar"
 
                     }
                 })
@@ -227,8 +229,6 @@ public class ConfirmarActividadesFragment extends Fragment {
                 })
                 .show();
     }
-
-
 
     private void aceptarEntrega(String id){
         String url = getString(R.string.url)+"aprobarActividad.php";
@@ -249,6 +249,7 @@ public class ConfirmarActividadesFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                         String url = getString(R.string.url) + "selecActividades.php";
                         generarTabla(url); // Actualizar la tabla después de rechazar la entrega
                     }
@@ -292,6 +293,7 @@ public class ConfirmarActividadesFragment extends Fragment {
                         }
                         String url = getString(R.string.url) + "selecActividades.php";
                         generarTabla(url); // Actualizar la tabla después de rechazar la entrega
+
                     }
                 },
                 new Response.ErrorListener() {

@@ -3,11 +3,13 @@ package tfg.solcoin;
 import static android.app.ProgressDialog.show;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +43,18 @@ public class InicioFragment extends Fragment {
         // Obtener la instancia de SharedPreferences
         //preferencias = getActivity().getSharedPreferences("nombre_preferencias", Context.MODE_PRIVATE);
         preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+
+        Button botonCerrar = rootView.findViewById(R.id.btnEnviar);
+        botonCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = preferencias.edit();
+                editor.putString("correo", "");
+                Intent i = new Intent(getActivity(),LoginActivity.class);
+                startActivity(i);
+                getActivity().finish();
+            }
+        });
 
         return rootView;
     }

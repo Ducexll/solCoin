@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,16 +29,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import android.graphics.Typeface;
 
 
 public class VerPremiosCanjeadosFragment extends Fragment {
 
     private String URL_PREMIOS;
-
     private SharedPreferences preferencias;
-
+    private String correo;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -78,7 +81,7 @@ public class VerPremiosCanjeadosFragment extends Fragment {
         LinearLayout linearLayoutPremios = rootView.findViewById(R.id.linearPremiosCanjeados);
 
         preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        String correo = preferencias.getString("correo", "");
+         correo = preferencias.getString("correo", "");
 
         URL_PREMIOS = getString(R.string.url) + "selectCanjea.php";
 
@@ -89,7 +92,7 @@ public class VerPremiosCanjeadosFragment extends Fragment {
     }
 
     private void obtenerPremiosDesdeWebService(LinearLayout linearLayoutPremios, String correo) {
-        StringRequest request = new StringRequest(Request.Method.GET, URL_PREMIOS,
+        StringRequest request = new StringRequest(Request.Method.POST, URL_PREMIOS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -101,7 +104,7 @@ public class VerPremiosCanjeadosFragment extends Fragment {
                                 String correoUsuario = canjeaObj.getString("Usuarios_correo");
 
                                 String fecha = canjeaObj.getString("fecha");
-                                String NombrePremio = canjeaObj.getString("NombrePremio");
+                                String NombrePremio = canjeaObj.getString("nombre");
 
 
 
@@ -130,7 +133,12 @@ public class VerPremiosCanjeadosFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
                     }
-                });
+                }){
+        protected Map<String, String> getParams() throws AuthFailureError {
+            Map<String,String> parametros = new HashMap<String,String>();
+            parametros.put("correo",correo);
+            return parametros;
+        }};
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(request);

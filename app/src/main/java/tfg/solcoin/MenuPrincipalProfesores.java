@@ -15,9 +15,9 @@ import androidx.fragment.app.Fragment;
 public class MenuPrincipalProfesores extends AppCompatActivity {
 
     //Declaramos los 3 fragmentos, es decir las 3 vistas
-    ConfirmarActividadesFragment firstFragment = new ConfirmarActividadesFragment();
-    VerPremiosCanjeadosFragment secondFragment = new VerPremiosCanjeadosFragment();
-    AnadirPremioFragment thirdFragment = new AnadirPremioFragment();
+    VerPremiosCanjeadosFragment secondFragment= new VerPremiosCanjeadosFragment();
+    InicioProfesoresFragment firstFragment= new InicioProfesoresFragment();
+    ConfirmarActividadesFragment thirdFragment = new ConfirmarActividadesFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

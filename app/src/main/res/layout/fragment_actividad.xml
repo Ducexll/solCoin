@@ -9,19 +9,23 @@
 
     <Spinner
         android:id="@+id/spinnerTrimestre"
-        android:layout_width="409dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/spinner_border"
+        android:padding="8dp"
+        android:popupBackground="@color/fondo_Principal"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTrimestre"
+        app:layout_constraintStart_toStartOf="@+id/textViewTrimestre"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewTrimestre"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:text="Selecciona un trimestre"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,10 +33,10 @@
         android:id="@+id/textViewSesiones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
         android:layout_marginTop="32dp"
         android:text="Selecciona las sesiones empleadas"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerTrimestre"
+        app:layout_constraintStart_toStartOf="@+id/spinnerTrimestre"
         app:layout_constraintTop_toBottomOf="@+id/spinnerTrimestre" />
 
     <EditText
@@ -40,8 +44,12 @@
         android:layout_width="134dp"
         android:layout_height="38dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/fondo_botones"
         android:ems="10"
         android:inputType="number"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSesiones"
         app:layout_constraintStart_toStartOf="@+id/textViewSesiones"
         app:layout_constraintTop_toBottomOf="@+id/textViewSesiones" />
 
@@ -51,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Numero de alumnos:"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNumSesiones"
         app:layout_constraintStart_toStartOf="@+id/editTextNumSesiones"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumSesiones" />
 
@@ -61,6 +70,9 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="number"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/fondo_botones"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -69,28 +81,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Ti`po de mantenimiento:"
+        android:text="Tipo de mantenimiento:"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNumAlumnos"
         app:layout_constraintStart_toStartOf="@+id/editTextNumAlumnos"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumAlumnos" />
 
     <Spinner
         android:id="@+id/spinnerTipoActividad"
-        android:layout_width="409dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/spinner_border"
+        android:padding="8dp"
+        android:popupBackground="@color/fondo_Principal"
+        app:layout_constraintEnd_toEndOf="@+id/textView9"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/boton_redondeado"
         android:text="Registrar Actividad"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerTipoActividad" />
 </androidx.constraintlayout.widget.ConstraintLayout>

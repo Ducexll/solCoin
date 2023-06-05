@@ -5,29 +5,34 @@
     android:id="@+id/checkedTextView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo_Principal"
     tools:context=".RegistroProfesoresActivity">
 
     <CheckBox
         android:id="@+id/checkBox2ASIRV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="90dp"
-        android:text="2-ASIR-V"
+        android:buttonTint="@color/fondo_botones"
+        android:state_checked="true"
+        android:text="@string/_2_asir_v"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox1ASIRV" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox1ASIRV"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
         android:id="@+id/checkBox2SMRV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="263dp"
-        android:layout_marginBottom="41dp"
-        android:text="2-SMR-V"
-        app:layout_constraintBottom_toTopOf="@+id/editTextContraseña"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2SMRD" />
+        android:layout_marginTop="20dp"
+        android:buttonTint="@color/fondo_botones"
+        android:state_checked="true"
+        android:text="@string/_2_smr_v"
+        app:layout_constraintEnd_toEndOf="@+id/checkBox2SMRD"
+        app:layout_constraintStart_toStartOf="@+id/checkBox2SMRD"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2SMRD"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
         android:id="@+id/checkBox1ASIRV"
@@ -35,67 +40,58 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:layout_marginEnd="90dp"
-        android:text="1-ASIR-V"
+        android:buttonTint="@color/fondo_botones"
+        android:state_checked="true"
+        android:text="@string/_1_asir_v"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
         android:id="@+id/checkBox1SMRV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="86dp"
-        android:text="1-SMR-V"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox2ASIRV"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox1SMRD" />
-
-    <TextView
-        android:id="@+id/textViewNombre"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="24dp"
-        android:text="Nombre y apellidos"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNombre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="20dp"
+        android:buttonTint="@color/fondo_botones"
+        android:state_checked="true"
+        android:text="@string/_1_smr_v"
+        app:layout_constraintStart_toStartOf="@+id/checkBox1SMRD"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox1SMRD"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/editTextNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginBottom="24dp"
         android:autofillHints="name"
+        android:backgroundTint="@color/fondo_botones"
+        android:hint="@string/ingresa_el_nombre"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/textViewCorreo"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewCorreo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="24dp"
-        android:text="Correo electrónico"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextCorreo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/editTextCorreo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginTop="36dp"
         android:autofillHints="email"
+        android:backgroundTint="@color/fondo_botones"
+        android:hint="@string/ingresa_el_correo_electronico"
         android:inputType="textEmailAddress"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCorreo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombre"
+        app:layout_constraintVertical_bias="0.01999998"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/editTextContraseña"
@@ -104,11 +100,14 @@
         android:layout_margin="16dp"
         android:layout_marginBottom="10dp"
         android:autofillHints="password"
-        android:hint="Introduce la contraseña"
+        android:backgroundTint="@color/fondo_botones"
+        android:hint="@string/introduce_la_contrase_a"
         android:inputType="textPassword"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/editTextConfirmarContraseña"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
     <EditText
@@ -120,25 +119,29 @@
         android:layout_marginEnd="45dp"
         android:layout_marginBottom="10dp"
         android:autofillHints="password"
-        android:hint="Ingrese de nuevo la contraseña"
+        android:backgroundTint="@color/fondo_botones"
+        android:hint="@string/ingrese_de_nuevo_la_contrase_a"
         android:inputType="textPassword"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/editTextContrasennaDocente"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/buttonRegistrar"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_margin="16dp"
         android:layout_marginBottom="16dp"
-        android:background="#2196F3"
-        android:text="Registrar"
-        android:textColor="#FFFFFF"
+        android:background="@drawable/boton_redondeado"
+        android:text="@string/registrar"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="@+id/editTextContraseña"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/editTextNombre" />
+        app:layout_constraintStart_toStartOf="@+id/editTextNombre"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -152,13 +155,17 @@
         android:id="@+id/editTextContrasennaDocente"
         android:layout_width="350dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="50dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/fondo_botones"
         android:ems="10"
-        android:hint="Introduce la contraseña de docente"
+        android:hint="@string/introduce_la_contrase_a_de_docente"
         android:inputType="textPersonName"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/buttonRegistrar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
         android:id="@+id/checkBox1SMRD"
@@ -166,19 +173,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:layout_marginEnd="86dp"
-        android:text="1-SMR-D"
+        android:buttonTint="@color/fondo_botones"
+        android:state_checked="true"
+        android:text="@string/_1_smr_d"
         app:layout_constraintEnd_toStartOf="@+id/checkBox1ASIRV"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
         android:id="@+id/checkBox2SMRD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="263dp"
-        android:text="2-SMR-D"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox1SMRV" />
+        android:layout_marginTop="20dp"
+        android:buttonTint="@color/fondo_botones"
+        android:state_checked="true"
+        android:text="@string/_2_smr_d"
+        app:layout_constraintEnd_toEndOf="@+id/checkBox1SMRV"
+        app:layout_constraintStart_toStartOf="@+id/checkBox1SMRV"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox1SMRV"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
